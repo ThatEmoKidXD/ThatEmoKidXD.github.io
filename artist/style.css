@@ -1,0 +1,52 @@
+body {
+    background-image: url('https://i.pinimg.com/564x/97/01/d9/9701d97d28bd4bef78a5587e7fd33673.jpg'); 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .image-div {
+        width: 100%; /* Adjust as needed */
+        height: 100%; /* Adjust as needed */
+        background-image: url('https://i.pinimg.com/564x/47/95/47/479547dcdc03aa5582301e3a7be02339.jpg'); /* Path to your image */
+        background-size: cover; /* Adjust background size */
+        background-position: center;
+        
+    }
+#outer {
+    height: 410px;
+    width: 1300px;
+
+    position: relative;
+    left: 300px;
+    border: 5px solid rgb(17, 147, 143);
+
+    
+}
+
+#about{
+    height:500px;
+    width:500px ;
+    position: relative;
+    top: 20px;
+    left: 300px;
+    background-color: rgb(152, 237, 237);
+    border: 5px solid rgb(17, 147, 143);
+
+    
+}
+h1{
+    background-image: url('https://i.pinimg.com/564x/da/8b/fe/da8bfe09da6c22618b909f0ea73be6ed.jpg'); /* Path to your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 300px; /* Adjust minimum height as needed */
+    min-width: 50px;
+    padding-left: 20px;
+    border: 20px solid  rgb(152, 237, 237) ;
+
+}
+h2{
+    color:  rgb(17, 147, 143);
+    padding-left: 20px;
+    padding-right: 20px;
+}
