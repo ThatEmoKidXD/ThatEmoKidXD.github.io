@@ -25,7 +25,7 @@ body {
 }
 
 #about{
-    height:500px;
+    height:700px;
     width:1300px ;
     position: relative;
     top: 20px;
@@ -52,5 +52,9 @@ h1{
     padding-left: 350px;
     padding-right: 5px;
 }
+iframe{
+    padding-top: 50px;
+    position: relative;
 
+}
 
