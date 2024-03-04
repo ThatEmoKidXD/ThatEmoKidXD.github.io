@@ -12,7 +12,9 @@ h1:hover{
 
 #outer{
     height: 200px;
-    background-color: rgba(205, 91, 150, 0.438);
+    background-image: url('https://steamuserimages-a.akamaihd.net/ugc/932676970231050504/4A91936F8DC9DB7B0E503C8B71C2E653AF449F5E/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true'); 
+    background-size: cover; 
+    background-position: center;
     
 }
 body{
@@ -28,6 +30,5 @@ h1{
 }
 h3{
     font-family: monospace;
-    
     color: rgb(71, 213, 0);
 }
