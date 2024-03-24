@@ -19,7 +19,7 @@ h1:hover{
     
 }
 body{
-    background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/6/67/This_Man_original_drawing.jpg/220px-This_Man_original_drawing.jpg'); 
+    background-image: url('https://shsthepapercut.com/wp-content/uploads/2020/01/download-8.jpg'); 
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -32,4 +32,13 @@ h1{
 h3{
     font-family: monospace;
     color: rgb(71, 213, 0);
+}
+
+#lower{
+    height: 1%; 
+    background-size: cover; 
+    background-position: center;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfyXXy53RROG1ENVMvoNByFqx5z9_8smeLUA&usqp=CAU');
+    top: 450px;
+    color: rgb(70, 185, 66);
 }
