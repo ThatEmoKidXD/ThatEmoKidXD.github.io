@@ -1,66 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Design</title>
+  <style>
+    .desktop {
+      background: blue;
+    }
 
-    <style>
-      div {
-        width: 100px;
-        height: 100px;
-      }
+    .tablet {
+      background: red;
+    }
 
-      .desktop {
-        background: blue;
-      }
+    .phone {
+      background: green;
+    }
 
-      .tablet {
-        background: red;
-      }
+    .desktop, .tablet, .phone {
+      width: 100px;
+      height: 100px;
+      display: none; /* Hide all versions by default */
+    }
 
-      .phone {
-        background: green;
-      }
-
+    @media (min-width: 769px) {
+      /* Desktop version */
       .desktop {
         display: block;
       }
-      .tablet,
-      .phone {
+      .tablet, .phone {
         display: none;
       }
+    }
 
-      @media (max-width: 768px) {
-        .tablet {
-          display: block;
-        }
-        .phone {
-          display: none;
-        }
-        .desktop {
-          display: none;
-        }
+    @media (max-width: 768px) and (min-width: 426px) {
+      /* Tablet version */
+      .tablet {
+        display: block;
       }
+      .desktop, .phone {
+        display: none;
+      }
+    }
 
-      @media (max-width: 425px) {
-        .tablet {
-          display: none;
-        }
-        .phone {
-          display: block;
-        }
-        .desktop {
-          display: none;
-        }
+    @media (max-width: 425px) {
+      /* Phone version */
+      .phone {
+        display: block;
       }
-    </style>
-  </head>
-  <body>
-    <div class="desktop"></div>
-        <img src="./desktop.svg" alt="">
-    <div class="tablet"></div>
-        <img src="./tablet.svg" alt="">
-    <div class="phone"></div>
-  </body>
+      .desktop, .tablet {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="desktop"></div>
+  <img src="./desktop.svg" alt="Desktop version">
+  <div class="tablet"></div>
+  <img src="./tablet.svg" alt="Tablet version">
+  <div class="phone"></div>
+</body>
 </html>
