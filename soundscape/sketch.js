@@ -1,18 +1,35 @@
-let riverSound;
 
 let userHasClicked = false;
 
+let creepSound;
+let moistSound;
+
+let circleCreepX;
+let circleCreepY;
+
+let circleMoistX;
+let circleMoistY;
+
 function preload() {
   
-  riverSound = loadSound('assets/river.wav');
+  
+
+  creepSound = loadSound('assets/creep.wav');
+  moistSound = loadSound('assets/moist.wav');
+  
 }
 
 function setup() {
+  
+  
   let cnv = createCanvas(100, 100);
   cnv.mousePressed(canvasPressed);
   background(220);
   text('tap here to play', 10, 20);
+  
+  
 }
+
 
 function canvasPressed() {
   // playing a sound file on a user gesture
@@ -25,29 +42,47 @@ function canvasPressed() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER)
-  riverSound.setVolume()
+  creepSound.setVolume()
+  circleCreepX = random(width);
+  circleCreepY = random(height);
+
+  
+  circleMoistX = random(width);
+  circleMoistY = random(height);
  
 }
 
 function draw() {
 
-  background('hotpink');
+  background('red')
+  //circle(circleX, circleY, 50)
   if(userHasClicked == false){
   text('Click to start the dududdudu', width/2, height/2)
   }
   else{
-    if(riverSound.isPlaying() ==false){
-      riverSound.play();
+    if(creepSound.isPlaying() ==false){
+      creepSound.play();
     }
+    let distanceCreep = dist(mouseX, mouseY, circleCreepX, circleCreepY)
+
+    let volumeCreep = map(
+      distanceCreep, 0, 200, 1, 0);
+       volumeCreep = constrain(volumeCreep,0,1);
+        creepSound.setVolume(volumeCreep);
+
+
+
+    if(moistSound.isPlaying() ==false){
+      moistSound.play();
+    }
+    let distanceMoist = dist(mouseX, mouseY, circleMoistX, circleMoistY)
+
+    let volumeMoist = map(
+      distanceMoist, 0, 200, 1, 0);
+       volumeMoist = constrain(volumeMoist,0,1);
     
-    let targetVolume = map(
-      mouseX,
-      0,
-      width,
-      0,
-      1
-    )
-    riverSound.setVolume(targetVolume)
+      
+    moistSound.setVolume(volumeMoist);
   }
 
 }
