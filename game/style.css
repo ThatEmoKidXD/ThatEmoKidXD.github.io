@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'OldEurope';
+    src: url('./Old\ Europe.ttf') format('truetype'),
+         url('./Old\ Europe.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Alagard';
+    src: url('./alagard.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GothicPixles';
+    src: url('./GothicPixels.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    background-color: black;
+}
+
+#title{
+    margin-top: 50px;
+    color: red;
+    font-family: 'GothicPixles', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+#aboutthegame{
+    margin-top: 50px;
+    max-width: 50%;
+    color: yellow;
+    font-family: 'Alagard', sans-serif;
+    font-size: 15px;
+    display: flex; 
+    align-items: left;
+}
+#aboutthegame img{
+    max-width: 30%;
+    max-height: 30%;
+    height: auto; 
+    margin-right: 10px;
+}
