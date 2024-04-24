@@ -23,7 +23,7 @@
 
 body{
     background-image: url('./me4.png') ;
-    
+    min-width: 425px;
     
     
 }
@@ -41,6 +41,7 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 50px;
+    min-width: 425px;
 }
 
 #aboutme{
@@ -53,6 +54,7 @@ body{
     justify-content: center;
     align-items: center;
     height: 300px;
+    min-width: 425px;
     
     
 }
@@ -77,6 +79,7 @@ body{
     font-size: 20px;
     flex-direction: column;
     line-height: 0.01;
+    min-width: 425px;
     
 }
 
@@ -97,4 +100,5 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 20px;
+    min-width: 425px;
 }
