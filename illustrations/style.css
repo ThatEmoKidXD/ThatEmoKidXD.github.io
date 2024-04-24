@@ -52,6 +52,15 @@ body{
     min-width: 425px;
    
 }
+#bottom a {
+    text-decoration: none;
+    color: red;
+    margin: 0 10px;
+}
+#bottom a:hover {
+    text-decoration: underline; 
+    color: yellow; 
+}
 
 .wrapper {
     width: 80%; 
@@ -64,7 +73,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 3%;
+    padding-top: 1%;
     padding-bottom: 3%;
     
 }
@@ -100,7 +109,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 3%;
+    padding-top: 1%;
     padding-bottom: 3%;
     
 }
@@ -147,4 +156,15 @@ body{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+#ilustartiontext{
+    width: 80%;
+    padding-top: 1%;
+    max-width: 90%;
+    color: yellow;
+    font-family: 'Alagard', sans-serif;
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; 
 }

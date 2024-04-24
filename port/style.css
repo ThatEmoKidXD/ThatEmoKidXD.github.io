@@ -35,7 +35,7 @@ body{
     margin-right: auto;
     padding-top: 3%;
     margin-top: 70px;
-    font-family: 'OldEurope', sans-serif;
+    font-family: 'GothicPixles', sans-serif;
     color: red;
     display: flex;
     justify-content: center;
@@ -101,6 +101,15 @@ body{
     align-items: center;
     font-size: 20px;
     min-width: 425px;
+}
+#bottom a {
+    text-decoration: none;
+    color: red;
+    margin: 0 10px;
+}
+#bottom a:hover {
+    text-decoration: underline; 
+    color: yellow; 
 }
 #loader {
     border: 16px solid #f3f3f3; /* Light grey */

@@ -116,6 +116,15 @@ body{
     min-width: 425px;
    
 }
+#bottom a {
+    text-decoration: none;
+    color: red;
+    margin: 0 10px;
+}
+#bottom a:hover {
+    text-decoration: underline; 
+    color: yellow; 
+}
 
 .wrapper {
     width: 90%; 
