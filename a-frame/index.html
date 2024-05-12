@@ -8,6 +8,8 @@
         <!-- Ensure the correct path and file name -->
         <a-asset-item id="grass" src="hues.gltf"></a-asset-item>
         <a-asset-item id="moon" src="moon.gltf"></a-asset-item>
+        <a-asset-item id="cat" src="CAT.gltf"></a-asset-item>
+        
       </a-assets>
 
       <!-- Add a player entity with collision detection and walking controls -->
@@ -15,10 +17,14 @@
         <a-camera></a-camera>
       </a-entity>
 
-      <!-- Wait until assets are loaded before adding the model -->
-      <a-entity position="0 0 3" gltf-model="#grass" class="collidable" static-body></a-entity>
-      <a-entity position="0 0 3" gltf-model="#moon" material="emissive:#FFFFFF; metalness: 0.5; opacity: 1;"></a-entity>
+      <a-entity gltf-model="#cat" position="2 1 1" animation-mixer scale="0.5 0.5 0.5"></a-entity>
 
+      <!-- Wait until assets are loaded before adding the model -->
+      <a-entity position="0 0 3" gltf-model="#grass" class="collidable" static-body ></a-entity>
+
+
+      <a-entity position="0 0 3" gltf-model="#moon" material="emissive:#FFFFFF; metalness: 0.5; opacity: 1;"></a-entity>
+     
       <!-- Add lights around the moon -->
       <a-entity position="0 0 3">
        
