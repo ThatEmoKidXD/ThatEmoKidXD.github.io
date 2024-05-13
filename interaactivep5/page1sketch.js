@@ -33,7 +33,7 @@ function mouseClicked() {
 
     // Create an HTML <img> element to display the GIF
     gifAnimation = createImg('haggig_1.gif', 'gif image', '', imageLoaded);
-    gifAnimation.hide(); // Hide initially until loaded
+    //gifAnimation.hide(); // Hide initially until loaded
   } else {
     // Check if the left mouse button is clicked
     if (mouseButton === LEFT) {
@@ -52,19 +52,18 @@ function mouseClicked() {
 }
 
 function imageLoaded() {
-  // Show the GIF and adjust its size to fit the canvas
-  gifAnimation.show();
-  let scaleFactor = min(width / gifAnimation.width, height / gifAnimation.height);
+ 
+  // Calculate scaling factors for width and height
+  let scaleX = windowWidth / gifAnimation.width;
+  let scaleY = windowHeight / gifAnimation.height;
+  let scaleFactor = max(scaleX, scaleY); // Use max to ensure the GIF covers the entire canvas
+
+  // Resize the GIF to fit the window
   gifAnimation.size(gifAnimation.width * scaleFactor, gifAnimation.height * scaleFactor);
 
-  // Position the GIF at the center of the canvas
-  let x = (windowWidth - gifAnimation.width) / 2;
-  let y = (windowHeight - gifAnimation.height) / 2;
-  gifAnimation.position(x, y);
-
-  // Enter fullscreen mode
+  // Position the GIF at the top-left corner of the canvas
+  gifAnimation.position(0, 0);
   fullscreen(true);
-
   // Disable all keys
   disableKeys();
 }
