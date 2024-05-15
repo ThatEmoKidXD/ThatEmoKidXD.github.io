@@ -1,10 +1,21 @@
 let gifAnimation;
 let leftClickCount = 0;
 let agreedToProceed = false;
+let clickSound; // Variable to hold the sound file
 
 function preload() {
-  // No need to preload the GIF since it's already loaded
+  // Preload the GIF
+  gifAnimation = loadImage('haggig_1.gif');
+
+  // Preload the sound file
+  clickSound = loadSound('han.wav', soundLoaded);
 }
+
+// Callback function for when the sound is loaded
+function soundLoaded() {
+  console.log('Sound file loaded successfully');
+}
+
 
 function setup() {
   // Set canvas size to match window dimensions
@@ -31,9 +42,14 @@ function mouseClicked() {
     let message = select('div');
     message.hide();
 
+    // Play the click sound
+    clickSound.play();
+
     // Create an HTML <img> element to display the GIF
-    gifAnimation = createImg('haggig_1.gif', 'gif image', '', imageLoaded);
-    //gifAnimation.hide(); // Hide initially until loaded
+    image(gifAnimation, 0, 0, windowWidth, windowHeight);
+
+    // Disable all keys
+    disableKeys();
   } else {
     // Check if the left mouse button is clicked
     if (mouseButton === LEFT) {
@@ -49,23 +65,6 @@ function mouseClicked() {
       }
     }
   }
-}
-
-function imageLoaded() {
- 
-  // Calculate scaling factors for width and height
-  let scaleX = windowWidth / gifAnimation.width;
-  let scaleY = windowHeight / gifAnimation.height;
-  let scaleFactor = max(scaleX, scaleY); // Use max to ensure the GIF covers the entire canvas
-
-  // Resize the GIF to fit the window
-  gifAnimation.size(gifAnimation.width * scaleFactor, gifAnimation.height * scaleFactor);
-
-  // Position the GIF at the top-left corner of the canvas
-  gifAnimation.position(0, 0);
-  fullscreen(true);
-  // Disable all keys
-  disableKeys();
 }
 
 function disableKeys() {
