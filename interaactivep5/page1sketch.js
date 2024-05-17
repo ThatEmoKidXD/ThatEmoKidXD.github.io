@@ -1,28 +1,21 @@
 let gifAnimation;
 let leftClickCount = 0;
 let agreedToProceed = false;
-let clickSound; // Variable to hold the sound file
+let mySound; // Variable to hold the sound file
 
 function preload() {
-  // Preload the GIF
-  gifAnimation = loadImage('haggig_1.gif');
-
   // Preload the sound file
-  clickSound = loadSound('han.wav', soundLoaded);
+  mySound = loadSound('han.wav');
 }
-
-// Callback function for when the sound is loaded
-function soundLoaded() {
-  console.log('Sound file loaded successfully');
-}
-
 
 function setup() {
   // Set canvas size to match window dimensions
   createCanvas(windowWidth, windowHeight);
+  noLoop(); // Prevent draw loop since we're not using it
 
   // Display a message prompting the user to click to agree
   let message = createDiv('Click to read the fairytale:)).');
+  message.id('message');
   message.style('position', 'fixed');
   message.style('top', '50%');
   message.style('left', '50%');
@@ -39,17 +32,15 @@ function mouseClicked() {
     agreedToProceed = true;
 
     // Hide the message
-    let message = select('div');
+    let message = select('#message');
     message.hide();
 
-    // Play the click sound
-    clickSound.play();
+    // Enter fullscreen mode
+    let fs = fullscreen();
+    fullscreen(!fs);
 
     // Create an HTML <img> element to display the GIF
-    image(gifAnimation, 0, 0, windowWidth, windowHeight);
-
-    // Disable all keys
-    disableKeys();
+    gifAnimation = createImg('haggig_1.gif', 'gif image', '', gifLoaded);
   } else {
     // Check if the left mouse button is clicked
     if (mouseButton === LEFT) {
@@ -67,9 +58,31 @@ function mouseClicked() {
   }
 }
 
+function gifLoaded() {
+  // Resize the GIF to fit the window
+  gifAnimation.size(windowWidth, windowHeight);
+  gifAnimation.position(0, 0); // Position the GIF at the top-left corner of the canvas
+
+  // Play the sound
+  mySound.loop();
+
+  // Disable all keys
+  disableKeys();
+}
+
 function disableKeys() {
   // Disable all keys
-  document.onkeydown = function (event) {
+  document.onkeydown = function(event) {
     event.preventDefault();
   };
+}
+
+function windowResized() {
+  // Resize the canvas to match the window dimensions
+  resizeCanvas(windowWidth, windowHeight);
+
+  // Resize the GIF to fit the window
+  if (gifAnimation) {
+    gifAnimation.size(windowWidth, windowHeight);
+  }
 }

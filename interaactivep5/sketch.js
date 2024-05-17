@@ -50,12 +50,6 @@ function draw() {
   } else {
     cursor(ARROW); // Reset cursor to default
   }
-
-  // Draw clickable areas (rectangles) on the canvas
-  fill(255, 0, 0, 100); // semi-transparent red
-  rect(rect1X, rect1Y, rectWidth, rectHeight); // Bottom rectangle
-  rect(rect2X, rect2Y, rectWidth, rectHeight); // Left top rectangle
-  rect(rect3X, rect3Y, rectWidth, rectHeight); // Right top rectangle
 }
 
 function mouseClicked() {
