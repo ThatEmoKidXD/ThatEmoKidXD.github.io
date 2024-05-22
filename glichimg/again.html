@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Morse Code Image</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: black;
+    }
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="morse-canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('morse-canvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image();
+    image.src = 'aha.jpg'; // Replace with your image URL
+
+    image.onload = () => {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      convertToVisualMorse();
+    };
+
+    function convertToVisualMorse() {
+      ctx.drawImage(image, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      const length = data.length;
+
+      const brightnessThreshold = 128; // Threshold for determining dot or dash
+      const dotRadius = 2; // Radius of dot in pixels
+      const dashWidth = 10; // Width of dash in pixels
+      const dashHeight = 4; // Height of dash in pixels
+
+      ctx.fillStyle = 'white';
+
+      for (let i = 0; i < length; i += 4) {
+        // Calculate brightness from RGB values
+        const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
+
+        // Determine dot or dash based on brightness
+        const isDot = brightness < brightnessThreshold;
+
+        // Calculate position
+        const x = (i / 4) % canvas.width;
+        const y = Math.floor((i / 4) / canvas.width);
+
+        // Draw dot or dash
+        if (isDot) {
+          ctx.beginPath();
+          ctx.arc(x * dotRadius * 2 + dotRadius, y * dotRadius * 2 + dotRadius, dotRadius, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillRect(x * dashWidth, y * dashHeight, dashWidth, dashHeight);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

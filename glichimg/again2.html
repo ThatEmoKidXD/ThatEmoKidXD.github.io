@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Morse Code Image</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: black;
+    }
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="morse-canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('morse-canvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image();
+    image.src = 'aha.jpg'; // Replace with your image URL
+
+    image.onload = () => {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      convertToVisualMorse();
+    };
+
+    function convertToVisualMorse() {
+      ctx.drawImage(image, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      const length = data.length;
+
+      const brightnessThreshold = 128; // Threshold for determining dot or dash
+
+      for (let i = 0; i < length; i += 4) {
+        // Calculate brightness from RGB values
+        const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
+
+        // Determine dot or dash based on brightness
+        const isDot = brightness < brightnessThreshold;
+
+        // Calculate position
+        const x = (i / 4) % canvas.width;
+        const y = Math.floor((i / 4) / canvas.width);
+
+        // Draw dot or dash
+        if (isDot) {
+          const dotSize = Math.max(1, Math.min(6, brightness / 32)); // Adjust dot size
+          ctx.beginPath();
+          ctx.arc(x + dotSize / 2, y + dotSize / 2, dotSize / 2, 0, Math.PI * 2);
+          ctx.fillStyle = 'white';
+          ctx.fill();
+        } else {
+          const dashSize = Math.max(1, Math.min(20, brightness / 32)); // Adjust dash size
+          ctx.fillStyle = 'white';
+          ctx.fillRect(x, y, dashSize, dashSize);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

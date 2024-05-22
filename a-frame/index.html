@@ -1,39 +1,52 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script>
+      AFRAME.registerShader('glitch', {
+        schema: {
+          time: {type: 'time', is: 'uniform'},
+          distortion: {type: 'float', is: 'uniform', default: 0.1}
+        },
+        vertexShader: `
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+          }
+        `,
+        fragmentShader: `
+          uniform float time;
+          uniform float distortion;
+          varying vec2 vUv;
+          void main() {
+            vec2 uv = vUv;
+            uv.y += distortion * sin(10.0 * uv.x + time * 0.5);
+            uv.x += distortion * sin(10.0 * uv.y + time * 0.5);
+            gl_FragColor = vec4(uv, 0.5 + 0.5 * sin(time), 1.0);
+          }
+        `
+      });
+    </script>
   </head>
   <body>
-    <a-scene fog="type: exponential; color: #1C1678; density:0.025;  " loading-screen="dotsColor: white; backgroundColor: black">
+    <a-scene fog="type: exponential; color: #1C1678; density:0.025;" loading-screen="dotsColor: white; backgroundColor: black">
       <a-assets>
-        <!-- Ensure the correct path and file name -->
-        <a-asset-item id="grass" src="hues.gltf"></a-asset-item>
+        <a-asset-item id="grass" src="another.gltf"></a-asset-item>
         <a-asset-item id="moon" src="moon.gltf"></a-asset-item>
         <a-asset-item id="cat" src="CAT.gltf"></a-asset-item>
-        
       </a-assets>
 
-      <!-- Add a player entity with collision detection and walking controls -->
       <a-entity id="player" position="0 1.6 0" movement-controls kinematic-body="radius: 0.3; mass: 50;" aabb-collider="objects: .collidable;">
-        <a-camera></a-camera>
+        <a-camera material="shader: glitch; distortion: 0.1;"></a-camera>
       </a-entity>
 
       <a-entity gltf-model="#cat" position="2 1 1" animation-mixer scale="0.5 0.5 0.5"></a-entity>
 
-      <!-- Wait until assets are loaded before adding the model -->
-      <a-entity position="0 0 3" gltf-model="#grass" class="collidable" static-body ></a-entity>
-
+      <a-entity position="0 0 3" gltf-model="#grass" class="collidable" static-body></a-entity>
 
       <a-entity position="0 0 3" gltf-model="#moon" material="emissive:#FFFFFF; metalness: 0.5; opacity: 1;"></a-entity>
-     
-      <!-- Add lights around the moon -->
-      <a-entity position="0 0 3">
-       
-      </a-entity>
 
-      <a-sky src="./unmountable-boot-volume.png"></a-sky>
+      <a-sky color="#ECECEC"></a-sky>
     </a-scene>
   </body>
 </html>
-
-
-

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distorted Colors Image</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="upload" accept="image/*">
+    <canvas id="canvas"></canvas>
+    <script>
+        document.getElementById('upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const pixels = imageData.data;
+
+                    const width = canvas.width;
+                    const height = canvas.height;
+
+                    // Create an empty array for the distorted image
+                    const distortedPixels = new Uint8ClampedArray(pixels.length);
+
+                    for (let y = 0; y < height; y++) {
+                        for (let x = 0; x < width; x++) {
+                            const index = (y * width + x) * 4;
+                            const r = pixels[index];
+                            const g = pixels[index + 1];
+                            const b = pixels[index + 2];
+                            const a = pixels[index + 3];
+
+                            // Calculate lightness
+                            const lightness = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+
+                            // Determine shift amount based on lightness
+                            const shift = Math.floor((lightness - 0.5) * 20); // Adjust 20 for more or less distortion
+                            const shiftedX = Math.min(Math.max(x + shift, 0), width - 1);
+
+                            const shiftedIndex = (y * width + shiftedX) * 4;
+                            distortedPixels[shiftedIndex] = r;
+                            distortedPixels[shiftedIndex + 1] = g;
+                            distortedPixels[shiftedIndex + 2] = b;
+                            distortedPixels[shiftedIndex + 3] = a;
+                        }
+                    }
+
+                    ctx.putImageData(new ImageData(distortedPixels, width, height), 0, 0);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>

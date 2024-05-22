@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randomly Sorted Pixels</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="upload" accept="image/*">
+    <canvas id="canvas"></canvas>
+    <script>
+        document.getElementById('upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const pixels = imageData.data;
+
+                    // Create an array to hold the pixels
+                    const pixelArray = [];
+                    for (let i = 0; i < pixels.length; i += 4) {
+                        pixelArray.push([pixels[i], pixels[i + 1], pixels[i + 2], pixels[i + 3]]);
+                    }
+
+                    // Shuffle the pixel array
+                    function shuffle(array) {
+                        for (let i = array.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [array[i], array[j]] = [array[j], array[i]];
+                        }
+                    }
+
+                    shuffle(pixelArray);
+
+                    // Write the shuffled pixels back to the imageData
+                    for (let i = 0; i < pixelArray.length; i++) {
+                        const [r, g, b, a] = pixelArray[i];
+                        pixels[i * 4] = r;
+                        pixels[i * 4 + 1] = g;
+                        pixels[i * 4 + 2] = b;
+                        pixels[i * 4 + 3] = a;
+                    }
+
+                    ctx.putImageData(imageData, 0, 0);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>

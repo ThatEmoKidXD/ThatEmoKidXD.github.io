@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Glitcher</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+      image-rendering: pixelated;
+    }
+    .controls {
+      margin-bottom: 20px;
+    }
+    input[type="file"] {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="controls">
+      <input type="file" id="upload" accept="image/*">
+    </div>
+    <canvas id="glitch-canvas"></canvas>
+  </div>
+  
+  <script>
+    const canvas = document.getElementById('glitch-canvas');
+    const ctx = canvas.getContext('2d');
+
+    document.getElementById('upload').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const image = new Image();
+        image.onload = () => {
+          canvas.width = image.width;
+          canvas.height = image.height;
+          ctx.drawImage(image, 0, 0);
+          applyGlitchEffect();
+        };
+        image.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function applyGlitchEffect() {
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      const glitchAmount = 30; // Number of glitch stripes
+      const maxDisplacement = 50; // Maximum pixel displacement
+      const noiseAmount = 2000; // Amount of noise
+      const rgbShiftAmount = 100; // Maximum amount to shift RGB channels
+
+      // Apply color shift glitch
+      for (let i = 0; i < glitchAmount; i++) {
+        const startY = Math.random() * canvas.height;
+        const endY = startY + Math.random() * 20;
+        const displacement = (Math.random() - 0.5) * maxDisplacement;
+        const verticalDisplacement = (Math.random() - 0.5) * 10;
+
+        for (let y = startY; y < endY; y++) {
+          for (let x = 0; x < canvas.width; x++) {
+            const index = (Math.floor(y) * canvas.width + x) * 4;
+            const displacedIndex = (Math.floor(y + verticalDisplacement) * canvas.width + Math.floor(x + displacement)) * 4;
+
+            if (displacedIndex >= 0 && displacedIndex < data.length) {
+              // Shift RGB channels randomly
+              const shiftAmount = (Math.random() - 0.5) * rgbShiftAmount;
+              data[displacedIndex] = data[index] + shiftAmount; // Red
+              data[displacedIndex + 1] = data[index + 1] + shiftAmount; // Green
+              data[displacedIndex + 2] = data[index + 2] + shiftAmount; // Blue
+            }
+          }
+        }
+      }
+
+      // Apply noise
+      for (let i = 0; i < noiseAmount; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const index = (Math.floor(y) * canvas.width + Math.floor(x)) * 4;
+        const noise = (Math.random() - 0.5) * 255;
+
+        data[index] += noise; // Red
+        data[index + 1] += noise; // Green
+        data[index + 3] += noise; // Blue
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Data Mosher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    canvas {
+      max-width: 100%;
+      max-height: 80vh;
+    }
+    input[type="file"] {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Data Mosher</h1>
+  <p>Upload an image file to apply pixel displacement:</p>
+  <input type="file" id="fileInput" accept="image/*"><br>
+  <canvas id="imageCanvas"></canvas>
+
+  <script>
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const image = new Image();
+        image.onload = function() {
+          mashImageData(image);
+        };
+        image.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function mashImageData(image) {
+      const canvas = document.getElementById('imageCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = image.width;
+      canvas.height = image.height;
+      ctx.drawImage(image, 0, 0);
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      const displacementFactor = 0.5; // Adjust displacement intensity
+      const displacementThreshold = 50; // Adjust luminance threshold for displacement
+
+      for (let i = 0; i < data.length; i += 4) {
+        const luminance = (0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]) / 255;
+        const displacementX = (Math.random() - 0.5) * luminance * displacementFactor;
+        const displacementY = (Math.random() - 0.5) * luminance * displacementFactor;
+
+        if (luminance > displacementThreshold / 255) {
+          const newIndex = ((i / 4) + displacementY * canvas.width + displacementX) * 4;
+
+          if (newIndex >= 0 && newIndex < data.length) {
+            data[i] = data[newIndex];
+            data[i + 1] = data[newIndex + 1];
+            data[i + 2] = data[newIndex + 2];
+          }
+        }
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    }
+  </script>
+</body>
+</html>
