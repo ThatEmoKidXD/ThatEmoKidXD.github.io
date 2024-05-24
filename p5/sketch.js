@@ -1,10 +1,13 @@
 let grid;
 let dice1, dice2;
 let currentSquareIndex = 0;
+const gridRows = 24;
+const gridCols = 24;
+const squareSize = 25; // Size of each square in the grid
 
 function setup() {
   createCanvas(600, 600);
-  grid = createGrid(24, 24); // Create a 24x24 grid
+  grid = createGrid(gridRows, gridCols); // Create a 24x24 grid
   dice1 = new Die(6); // Both dice are six-sided
   dice2 = new Die(6);
 }
@@ -54,32 +57,39 @@ function fillNextSquare() {
 }
 
 function drawGrid() {
-  let squareSize = width / 24;
+  const totalGridWidth = gridCols * squareSize;
+  const totalGridHeight = gridRows * squareSize;
+  const offsetX = (width - totalGridWidth) / 2;
+  const offsetY = (height - totalGridHeight) / 2;
+
   for (let i = 0; i < grid.length; i++) {
     let square = grid[i];
+    let x = square.x * squareSize + offsetX;
+    let y = square.y * squareSize + offsetY;
+    
     if (square.filled) {
       fill(0);
       noStroke();
-      rect(square.x * squareSize, square.y * squareSize, squareSize, squareSize);
+      rect(x, y, squareSize, squareSize);
     } else if (square.halfFilled) {
       fill(0);
       noStroke();
       if (square.topHalf) {
-        rect(square.x * squareSize, square.y * squareSize, squareSize, squareSize / 2);
+        rect(x, y, squareSize, squareSize / 2);
       }
       if (square.bottomHalf) {
-        rect(square.x * squareSize, square.y * squareSize + squareSize / 2, squareSize, squareSize / 2);
+        rect(x, y + squareSize / 2, squareSize, squareSize / 2);
       }
       if (square.leftHalf) {
-        rect(square.x * squareSize, square.y * squareSize, squareSize / 2, squareSize);
+        rect(x, y, squareSize / 2, squareSize);
       }
       if (square.rightHalf) {
-        rect(square.x * squareSize + squareSize / 2, square.y * squareSize, squareSize / 2, squareSize);
+        rect(x + squareSize / 2, y, squareSize / 2, squareSize);
       }
     } else if (square.outlined) {
       noFill();
       stroke(0);
-      rect(square.x * squareSize, square.y * squareSize, squareSize, squareSize);
+      rect(x, y, squareSize, squareSize);
     }
   }
 }
@@ -141,8 +151,3 @@ class Die {
     return Math.floor(random(1, this.sides + 1));
   }
 }
-
-
-
-
-

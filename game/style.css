@@ -114,12 +114,14 @@ body{
     align-items: center;
     font-size: 20px;
     min-width: 425px;
+    flex-wrap: wrap;
    
 }
 #bottom a {
     text-decoration: none;
     color: red;
     margin: 0 10px;
+    white-space: nowrap; 
 }
 #bottom a:hover {
     text-decoration: underline; 
