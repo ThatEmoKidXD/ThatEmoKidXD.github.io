@@ -10,14 +10,18 @@
         this.el.addEventListener('hitstart', function (evt) {
           console.log('Collision detected with', evt.detail);
         });
+        this.el.addEventListener('hitend', function (evt) {
+          console.log('Collision ended with', evt.detail);
+        });
       }
     });
   </script>
 </head>
 <body>
-  <a-scene fog="type: exponential; color: red; density:0.0025;">
-    <!-- Simplified scene to focus on collision detection -->
+  <a-scene fog="type: exponential; color: red; density: 0.0025;">
+    <!-- Your GLTF model -->
     <a-entity gltf-model="another.gltf" position="0 0 5" animation-mixer></a-entity>
+
     <!-- Add a sky sphere -->
     <a-sky color="blue"></a-sky>
 
@@ -26,11 +30,14 @@
               aabb-collider="objects: .collidable; interval: 100" 
               aabb-collider-listener></a-entity>
 
-    <!-- Visible box for collision detection debugging -->
-    <a-box class="collidable" position="0 1 0" width="10" height="10" depth="10" color="red"></a-box>
+    <!-- Visible boundary planes to prevent the user from walking off -->
+    <a-plane class="collidable" position="0 1.6 -5" rotation="0 0 0" width="10" height="5" color="red" opacity="0.5"></a-plane>
+    <a-plane class="collidable" position="0 1.6 5" rotation="0 180 0" width="10" height="5" color="green" opacity="0.5"></a-plane>
+    <a-plane class="collidable" position="-5 1.6 0" rotation="0 90 0" width="10" height="5" color="blue" opacity="0.5"></a-plane>
+    <a-plane class="collidable" position="5 1.6 0" rotation="0 -90 0" width="10" height="5" color="yellow" opacity="0.5"></a-plane>
   </a-scene>
   <style>
-    body {
+     body {
       margin: 0;
       overflow: hidden;
       display: flex;
