@@ -33,43 +33,41 @@ body {
     color: red;
 }
 
-#letter, #content {
+#letter, #content, #bottom {
     background-color: black;
-    width: 70%;
+    width: 80%; /* Adjusted width */
+    max-width: 1000px; /* Optional: Set a max-width for better scaling */
     margin: 0 auto;
     padding-top: 1%;
-    padding-bottom: 1%;
+    padding-bottom: 3%; /* Adjusted padding */
     text-align: center;
     font-family: 'Alagard';
     color: red;
 }
 
 #title {
-    font-family: 'Alagard';
-    font-size: 36px;
+    margin-top: 50px;
+    color: red;
+    font-family: 'GothicPixles', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
 }
 
 #main-image {
     max-width: 50%;
     height: auto;
+    min-width: 300px; /* Ensure the image does not get too small */
 }
 
 #bottom {
-    background-color: black;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 1%;
-    padding-bottom: 3%;
     border-top: 3px solid red;
-    font-family: 'Alagard';
-    color: red;
     display: flex;
     flex-wrap: wrap; /* Allows wrapping to the next line */
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    min-width: 425px;
 }
 
 #bottom a {
@@ -80,6 +78,37 @@ body {
 }
 
 #bottom a:hover {
+    text-decoration: underline;
+    color: yellow;
+}
+
+@media screen and (max-width: 768px) {
+    #letter, #content, #bottom {
+        font-size: 18px;
+        padding: 1% 5%;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #letter, #content, #bottom {
+        font-size: 16px;
+        padding: 1% 5%;
+        width: 95%;
+    }
+}
+
+
+
+
+a {
+    text-decoration: none;
+    color: red;
+    margin: 0 10px;
+    white-space: nowrap; /* Prevents wrapping within the link text */
+}
+
+a:hover {
     text-decoration: underline;
     color: yellow;
 }
