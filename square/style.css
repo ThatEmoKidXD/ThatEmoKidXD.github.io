@@ -56,7 +56,7 @@ body {
 }
 
 #main-image {
-    max-width: 50%;
+    max-width: 80%; /* Increased max-width for larger image */
     height: auto;
     min-width: 300px; /* Ensure the image does not get too small */
 }
@@ -88,6 +88,10 @@ body {
         padding: 1% 5%;
         width: 90%;
     }
+
+    #main-image {
+        max-width: 70%; /* Adjust max-width for smaller screens */
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -96,10 +100,11 @@ body {
         padding: 1% 5%;
         width: 95%;
     }
+
+    #main-image {
+        max-width: 60%; /* Adjust max-width for very small screens */
+    }
 }
-
-
-
 
 a {
     text-decoration: none;

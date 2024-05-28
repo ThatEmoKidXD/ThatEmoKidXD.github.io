@@ -6,10 +6,15 @@ const gridCols = 24;
 const squareSize = 25; // Size of each square in the grid
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(gridCols * squareSize, gridRows * squareSize);
   grid = createGrid(gridRows, gridCols); // Create a 24x24 grid
   dice1 = new Die(6); // Both dice are six-sided
   dice2 = new Die(6);
+
+  // Create save button and attach saveCanvas function
+  let saveButton = createButton('Save Picture');
+  saveButton.position(10, 10); // Position the button at the top left corner
+  saveButton.mousePressed(saveCanvasImage); // Attach event to save canvas
 }
 
 function draw() {
@@ -57,16 +62,11 @@ function fillNextSquare() {
 }
 
 function drawGrid() {
-  const totalGridWidth = gridCols * squareSize;
-  const totalGridHeight = gridRows * squareSize;
-  const offsetX = (width - totalGridWidth) / 2;
-  const offsetY = (height - totalGridHeight) / 2;
-
   for (let i = 0; i < grid.length; i++) {
     let square = grid[i];
-    let x = square.x * squareSize + offsetX;
-    let y = square.y * squareSize + offsetY;
-    
+    let x = square.x * squareSize;
+    let y = square.y * squareSize;
+
     if (square.filled) {
       fill(0);
       noStroke();
@@ -150,4 +150,9 @@ class Die {
   roll() {
     return Math.floor(random(1, this.sides + 1));
   }
+}
+
+// Function to save canvas image
+function saveCanvasImage() {
+  saveCanvas('SquareyDiceyGridQuest', 'png');
 }

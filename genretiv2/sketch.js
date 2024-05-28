@@ -55,8 +55,9 @@ function draw() {
     noFill();
     rect(centerX, centerY, additionalCubeSizeD, additionalCubeSizeD);
   }
-   // Draw horizontal circles with sizes based on distance from the center
- for (let i = 0; i < 10; i++) {
+
+  // Draw horizontal circles with sizes based on distance from the center
+  for (let i = 0; i < 10; i++) {
     let additionalCircleSizeH = 300;
     let additionalCircleXH = random(centerX - windowWidth, centerX + windowWidth);
     let distanceFromCenterH = abs(additionalCircleXH - centerX);
@@ -75,8 +76,9 @@ function draw() {
     stroke(255, random(1, 10));
     noFill();
     ellipse(centerX, additionalCircleYV, additionalCircleSizeV);
-
   }
+
+  // Draw vertical circles that get smaller when they are further from the center
   for (let i = 0; i < 10; i++) {
     let additionalCircleSizeV = 300;
     let additionalCircleYV = random(centerY - windowHeight, centerY + windowHeight);
@@ -86,29 +88,39 @@ function draw() {
     noFill();
     ellipse(centerX, additionalCircleYV, additionalCircleSizeV);
   }
+
   // Draw horizontal circles with sizes based on distance from the center
-for (let i = 0; i < 10; i++) {
-  let additionalCircleSizeH = 300;
-  let additionalCircleXH = random(centerX - windowWidth, centerX + windowWidth);
-  let distanceFromCenterH = abs(additionalCircleXH - centerX);
-  additionalCircleSizeH -= distanceFromCenterH * 0.1; // Decrease size based on distance
-  stroke(255, random(1, 10));
-  noFill();
-  ellipse(additionalCircleXH, centerY, additionalCircleSizeH);
+  for (let i = 0; i < 10; i++) {
+    let additionalCircleSizeH = 300;
+    let additionalCircleXH = random(centerX - windowWidth, centerX + windowWidth);
+    let distanceFromCenterH = abs(additionalCircleXH - centerX);
+    additionalCircleSizeH -= distanceFromCenterH * 0.1; // Decrease size based on distance
+    stroke(255, random(1, 10));
+    noFill();
+    ellipse(additionalCircleXH, centerY, additionalCircleSizeH);
+  }
+
+  // Draw diagonal circles that get smaller when they are further from the center
+  for (let i = 0; i < 10; i++) {
+    let additionalCircleSizeD = 300;
+    // Calculate diagonal distance from center
+    let dx = width / 10 * i - centerX;
+    let dy = height / 10 * i - centerY;
+    let distanceFromCenterD = sqrt(dx * dx + dy * dy);
+    additionalCircleSizeD -= distanceFromCenterD * 0.1; // Decrease size based on distance
+    stroke(255, random(1, 10));
+    noFill();
+    ellipse(centerX, centerY, additionalCircleSizeD);
+  }
+
+  // Draw the central black circle
+  fill(0);
+  ellipse(centerX, centerY, 200);
 }
-// Draw diagonal circles that get smaller when they are further from the center
-for (let i = 0; i < 10; i++) {
-  let additionalCircleSizeD = 300;
-  // Calculate diagonal distance from center
-  let dx = width / 10 * i - centerX;
-  let dy = height / 10 * i - centerY;
-  let distanceFromCenterD = sqrt(dx * dx + dy * dy);
-  additionalCircleSizeD -= distanceFromCenterD * 0.1; // Decrease size based on distance
-  stroke(255, random(1, 10));
-  noFill();
-  ellipse(centerX, centerY, additionalCircleSizeD);
-}
-// Draw the central black circle
-fill(0); 
-ellipse(centerX, centerY, 200);
+
+// Save the canvas when the space bar is pressed
+function keyPressed() {
+  if (key === ' ') {
+    saveCanvas('myArtwork', 'png');
+  }
 }
