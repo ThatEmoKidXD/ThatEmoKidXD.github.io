@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'OldEurope';
-    src: url('./Old\ Europe.ttf') format('truetype'),
-         url('./Old\ Europe.ttf') format('truetype');
+    src: url('./Old\ Europe.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -35,11 +34,10 @@ body {
 
 #letter, #content, #bottom {
     background-color: black;
-    width: 80%; /* Adjusted width */
-    max-width: 1000px; /* Optional: Set a max-width for better scaling */
+    width: 80%;
+    max-width: 1000px;
     margin: 0 auto;
-    padding-top: 1%;
-    padding-bottom: 3%; /* Adjusted padding */
+    padding: 1% 0;
     text-align: center;
     font-family: 'Alagard';
     color: red;
@@ -55,29 +53,29 @@ body {
     font-size: 50px;
 }
 
-#main-image {
-    max-width: 80%; /* Increased max-width for larger image */
+#generated-image {
+    max-width: 80%;
     height: auto;
-    min-width: 300px; /* Ensure the image does not get too small */
+    min-width: 300px;
 }
 
 #bottom {
     border-top: 3px solid red;
     display: flex;
-    flex-wrap: wrap; /* Allows wrapping to the next line */
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     font-size: 20px;
 }
 
-#bottom a {
+#bottom a, .styled-link {
     text-decoration: none;
     color: red;
     margin: 0 10px;
-    white-space: nowrap; /* Prevents wrapping within the link text */
+    white-space: nowrap;
 }
 
-#bottom a:hover {
+#bottom a:hover, .styled-link:hover {
     text-decoration: underline;
     color: yellow;
 }
@@ -89,8 +87,8 @@ body {
         width: 90%;
     }
 
-    #main-image {
-        max-width: 70%; /* Adjust max-width for smaller screens */
+    #generated-image {
+        max-width: 70%;
     }
 }
 
@@ -101,19 +99,7 @@ body {
         width: 95%;
     }
 
-    #main-image {
-        max-width: 60%; /* Adjust max-width for very small screens */
+    #generated-image {
+        max-width: 60%;
     }
-}
-
-a {
-    text-decoration: none;
-    color: red;
-    margin: 0 10px;
-    white-space: nowrap; /* Prevents wrapping within the link text */
-}
-
-a:hover {
-    text-decoration: underline;
-    color: yellow;
 }
