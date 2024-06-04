@@ -24,11 +24,13 @@ body{
         background-repeat: no-repeat;
         background-attachment: fixed;
 }
-h1{
+h1 {
     font-family: monospace;
     font-style: oblique;
     color: rgb(213, 0, 39);
+    font-size: 70px; /* Increased font size */
 }
+
 h3{
     font-family: monospace;
     color: rgb(71, 213, 0);
