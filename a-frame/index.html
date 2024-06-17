@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
   
   <!-- Your custom navmesh script -->
-  <script src="scripts/navmesh.js"></script>
+  <script src="./lib/simple-navmesh-constraint.js"></script>
   
   <style>
     body {
@@ -44,11 +44,11 @@
 
     <!-- Camera with look-controls, wasd-controls, and simple-navmesh-constraint components -->
     <a-entity id="rig" position="0 1.6 0" movement-controls="constrainToNavMesh: true">
-      <a-entity id="camera" camera look-controls simple-navmesh-constraint="navmesh: #navmesh; fall: 0; height: 1.6;"></a-entity>
+      <a-entity id="camera" camera wasd-controls look-controls simple-navmesh-constraint="navmesh: #navmesh; fall: 0; height: 1.6;"></a-entity>
     </a-entity>
   </a-scene>
 
-  <script>
+  <!-- <script>
     // Register custom components
     AFRAME.registerComponent('log-collisions', {
       init: function () {
@@ -67,6 +67,6 @@
     // Attach the log-collisions and log-movements components to the camera entity
     document.querySelector('#camera').setAttribute('log-collisions', '');
     document.querySelector('#camera').setAttribute('log-movements', '');
-  </script>
+  </script> -->
 </body>
 </html>
