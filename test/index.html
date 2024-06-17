@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>A-frame</title>
+  <title>nosaukums</title>
   
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
@@ -21,16 +21,13 @@
     a-scene {
       width: 100%;
       height: 100%;
-      transform: scale(5, 2); 
+      transform: scale(1, 1); 
       transform-origin: center;
     }
   </style>
 </head>
 <body>
   <a-scene fog="type: exponential; color: red; density: 0.0025;" shadow="type: pcfsoft">
-    <!-- GLTF model -->
-    <a-entity gltf-model="url(another.gltf)" position="0 0 5" animation-mixer></a-entity>
-
     <!-- Add a sky sphere -->
     <a-sky color="blue"></a-sky>
 
@@ -43,22 +40,13 @@
     </a-entity>
   </a-scene>
   <script>
-    AFRAME.registerComponent('log-collisions', {
-      init: function () {
-        this.el.addEventListener('hitstart', function (evt) {
-          console.log('Collision detected with:', evt.detail.targetEl);
-        });
-      }
-    });
-
     AFRAME.registerComponent('log-movements', {
       tick: function () {
         console.log('Camera position:', this.el.getAttribute('position'));
       }
     });
 
-    // Attach the log-collisions and log-movements components to the camera entity
-    document.querySelector('#camera').setAttribute('log-collisions', '');
+    // Attach the log-movements component to the camera entity
     document.querySelector('#camera').setAttribute('log-movements', '');
   </script>
 </body>
