@@ -5,9 +5,13 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <title>A-frame</title>
   
+  <!-- A-Frame library and extras -->
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+  
+  <!-- Your custom navmesh script -->
   <script src="scripts/navmesh.js"></script>
+  
   <style>
     body {
       margin: 0;
@@ -23,6 +27,7 @@
       height: 100%;
       transform: scale(5, 2); 
       transform-origin: center;
+      /* Avoid using transform for scaling the scene */
     }
   </style>
 </head>
@@ -42,7 +47,9 @@
       <a-entity id="camera" camera look-controls simple-navmesh-constraint="navmesh: #navmesh; fall: 0; height: 1.6;"></a-entity>
     </a-entity>
   </a-scene>
+
   <script>
+    // Register custom components
     AFRAME.registerComponent('log-collisions', {
       init: function () {
         this.el.addEventListener('hitstart', function (evt) {
