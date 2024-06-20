@@ -24,8 +24,7 @@
     }
     a-scene {
       width: 100%;
-      height: 100%;
-      transform: scale(5, 2); 
+      height: 100%;transform: scale(5, 2); 
       transform-origin: center;
       /* Avoid using transform for scaling the scene */
     }
@@ -34,13 +33,13 @@
 <body>
   <a-scene fog="type: exponential; color: red; density: 0.0025;" shadow="type: pcfsoft">
     <!-- GLTF model -->
-    <a-entity gltf-model="url(another.gltf)" position="0 0 5" animation-mixer></a-entity>
+    <a-entity gltf-model="url(another.gltf)" position="30 0 50" animation-mixer></a-entity>
 
     <!-- Add a sky sphere -->
     <a-sky color="blue"></a-sky>
 
     <!-- Horizontal plane with nav-mesh -->
-    <a-entity id="navmesh" geometry="primitive: plane; width: 10; height: 10" rotation="-90 0 0" material="color: #7BC8A4" nav-mesh></a-entity>
+    <a-entity id="navmesh" geometry="primitive: plane; width: 100; height: 200" rotation="-90 0 0" position="0 0 -80" material="opacity: 0; transparent: true;" nav-mesh></a-entity>
 
     <!-- Camera with look-controls, wasd-controls, and simple-navmesh-constraint components -->
     <a-entity id="rig" position="0 1.6 0" movement-controls="constrainToNavMesh: true">
