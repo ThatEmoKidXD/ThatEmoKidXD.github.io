@@ -62,18 +62,35 @@ body {
     padding-top: 5%;
     padding-bottom: 2%; /* Adjusted padding */
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     text-align: center; /* Ensure images are centered horizontally */
     min-width: 425px;
 }
 
+#aboutme .image-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Add gap between images */
+}
+
 #aboutme img {
     max-width: 100%; /* Ensure images scale with container */
     height: auto; /* Maintain aspect ratio */
-    margin-bottom: 20px;
     max-height: 600px; /* Set a maximum height for the images */
+}
+
+#aboutme .last-image {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Ensure the last image takes up the full width */
+    margin-top: 20px; /* Add margin to create a gap */
+}
+
+#aboutme .last-image img {
+    max-width: 100%; /* Ensure last image scales with container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 600px; /* Set a maximum height for the last image */
 }
 
 /* Styles for the text about me section (adjusted with margin-top) */
