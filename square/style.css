@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'OldEurope';
-    src: url('./Old\ Europe.ttf') format('truetype'),
-         url('./Old\ Europe.ttf') format('truetype');
+    src: url('./Old\ Europe.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -22,24 +21,25 @@
 
 body {
     background-image: url('./me.png');
+    background-size: cover;
+    background-position: center;
     min-width: 425px;
     margin: 0;
-    padding: 0;
+    padding: 5vh 0; /* Add padding to the top and bottom */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     height: 100vh;
     color: red;
+    box-sizing: border-box; /* Include padding in height calculation */
 }
 
 #letter, #content, #bottom {
     background-color: black;
-    width: 80%; /* Adjusted width */
-    max-width: 1000px; /* Optional: Set a max-width for better scaling */
+    width: 80%;
+    max-width: 1000px;
     margin: 0 auto;
-    padding-top: 1%;
-    padding-bottom: 3%; /* Adjusted padding */
+    padding: 1% 0;
     text-align: center;
     font-family: 'Alagard';
     color: red;
@@ -56,29 +56,38 @@ body {
 }
 
 #main-image {
-    max-width: 80%; /* Increased max-width for larger image */
+    max-width: 80%;
     height: auto;
-    min-width: 300px; /* Ensure the image does not get too small */
+    min-width: 300px;
 }
 
 #bottom {
     border-top: 3px solid red;
     display: flex;
-    flex-wrap: wrap; /* Allows wrapping to the next line */
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     font-size: 20px;
 }
 
-#bottom a {
+/* General link styling */
+a, .styled-link {
     text-decoration: none;
     color: red;
     margin: 0 10px;
-    white-space: nowrap; /* Prevents wrapping within the link text */
+    white-space: nowrap;
 }
 
-#bottom a:hover {
+a:link, a:visited, .styled-link:link, .styled-link:visited {
+    color: red; /* Ensure the link color stays red even after being clicked */
+}
+
+a:hover, .styled-link:hover {
     text-decoration: underline;
+    color: yellow;
+}
+
+a:active, .styled-link:active {
     color: yellow;
 }
 
@@ -90,7 +99,7 @@ body {
     }
 
     #main-image {
-        max-width: 70%; /* Adjust max-width for smaller screens */
+        max-width: 70%;
     }
 }
 
@@ -102,18 +111,6 @@ body {
     }
 
     #main-image {
-        max-width: 60%; /* Adjust max-width for very small screens */
+        max-width: 60%;
     }
-}
-
-a {
-    text-decoration: none;
-    color: red;
-    margin: 0 10px;
-    white-space: nowrap; /* Prevents wrapping within the link text */
-}
-
-a:hover {
-    text-decoration: underline;
-    color: yellow;
 }

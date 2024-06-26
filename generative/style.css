@@ -41,6 +41,9 @@ body {
     text-align: center;
     font-family: 'Alagard';
     color: red;
+    padding-top: 1%;
+    padding-bottom: 3%;
+  
 }
 
 #title {
