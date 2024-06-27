@@ -38,14 +38,14 @@ body {
 
 /* Styles for the title section (unchanged) */
 #title {
-    background-color: black;
+    
     width: 70%;
     margin-left: auto;
     margin-right: auto;
     padding-top: 3%;
     margin-top: 70px;
     font-family: 'GothicPixles', sans-serif;
-    color: red;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +55,7 @@ body {
 
 /* Styles for the about me section (unchanged) */
 #aboutme {
-    background-color: black;
+    background-color: ;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
@@ -78,12 +78,15 @@ body {
     max-width: 100%; /* Ensure images scale with container */
     height: auto; /* Maintain aspect ratio */
     max-height: 600px; /* Set a maximum height for the images */
+    border: 5px solid red; /* Add red border to images */
 }
 
 #aboutme .last-image {
     display: flex;
     justify-content: center;
-    width: 100%; /* Ensure the last image takes up the full width */
+    flex-wrap: wrap; /* Ensure images are responsive */
+    gap: 20px; /* Add gap between images */
+    width: 100%; /* Ensure the last image container takes up the full width */
     margin-top: 20px; /* Add margin to create a gap */
 }
 
@@ -91,11 +94,26 @@ body {
     max-width: 100%; /* Ensure last image scales with container */
     height: auto; /* Maintain aspect ratio */
     max-height: 600px; /* Set a maximum height for the last image */
+    border: 5px solid red; /* Add red border to the last image */
+}
+
+/* Styles for the video container */
+.video-container {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Ensure the video container takes up the full width */
+    margin-top: 20px; /* Add margin to create a gap */
+}
+
+.video-container video {
+    max-width: 100%; /* Ensure video scales with container */
+    height: auto; /* Maintain aspect ratio */
+    border: 5px solid red; /* Add red border to the video */
 }
 
 /* Styles for the text about me section (adjusted with margin-top) */
 #textaboutme {
-    background-color: black;
+    background-color:;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
@@ -149,7 +167,7 @@ body {
 
 /* Styles for the bottom section (unchanged) */
 #bottom {
-    background-color: black;
+    background-color:;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
